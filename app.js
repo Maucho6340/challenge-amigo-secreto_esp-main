@@ -1,7 +1,7 @@
 /* El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. 
    Aquí deberás desarrollar la lógica para resolver el problema.*/
 
-// Inicializar el array de participantes
+/* Inicializar el array de participantes
 let participantes = [];
 
 // Función para agregar un nuevo participante
@@ -9,6 +9,28 @@ function agregarParticipante(nombre) {
   // Agrega el nombre al array de participantes
   participantes.push(nombre);
 }
+*/
+
+
+// Función para verificar que el length del array >=4 y par
+let listaDeNombres = [];
+
+function agregarNombre() {
+  let nombre = document.getElementById("nombreInput").value;
+  if (nombre) listaDeNombres.push(nombre), console.log(`Nombre agregado: ${nombre}`), document.getElementById("nombreInput").value = "", document.getElementById("nombresLista").textContent = listaDeNombres.join(", ");
+}
+
+function verificarListaDeNombres() {
+  console.log("Lista actual de nombres:", listaDeNombres);
+  if (listaDeNombres.length < 4) return console.log("No se puede sortear con menos de 4 participantes."), false;
+  if (listaDeNombres.length % 2 !== 0) return console.log("Debe haber una cantidad de participantes par."), false;
+  return console.log("La lista cumple con las condiciones."), true;
+}
+
+
+
+
+
 
 // Función para realizar el sorteo
 function realizarSorteo() {
