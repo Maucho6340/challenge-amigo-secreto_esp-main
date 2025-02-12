@@ -9,7 +9,7 @@ function agregarParticipante(nombre) {
   // Agrega el nombre al array de participantes
   participantes.push(nombre);
 }
-*/
+
 
 
 // Función para verificar que el length del array >=4 y par
@@ -26,38 +26,29 @@ function verificarListaDeNombres() {
   if (listaDeNombres.length % 2 !== 0) return console.log("Debe haber una cantidad de participantes par."), false;
   return console.log("La lista cumple con las condiciones."), true;
 }
+*/
 
+let listaDeNombres = [], sorteoRealizado = false;
 
-
-
-
-
-// Función para realizar el sorteo
-function realizarSorteo() {
-  // Mezclar aleatoriamente el array de participantes
-  participantes = mezclarArray(participantes);
-
-  // Crear un objeto con los pares de amigos secretos
-  let paresAmigosSecretos = {};
-
-  // Lógica para asignar a cada participante un amigo secreto
-  for (let i = 0; i < participantes.length; i++) {
-    let amigosecreto = participantes[(i + 1) % participantes.length];
-    paresAmigosSecretos[participantes[i]] = amigosecreto;
-  }
-
-  return paresAmigosSecretos;
+function agregarAmigo() {
+  if (sorteoRealizado) return alert("Debe ingresar todos los nombres de una sola vez"), document.getElementById("amigo").value = "";
+  let nombre = document.getElementById("amigo").value;
+  if (!isNaN(nombre)) return alert("solo nombres"), document.getElementById("amigo").value = "";
+  if (nombre) listaDeNombres.push(nombre), alert(`Nombre agregado: ${nombre}`), document.getElementById("amigo").value = "", document.getElementById("listaAmigos").innerHTML += `<li>${nombre}</li>`;
 }
 
-// Función auxiliar para mezclar un array de forma aleatoria
-function mezclarArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+function sortearAmigo() {
+  if (!sorteoRealizado) {
+    if (listaDeNombres.length < 4) return alert("Se necesita al menos cuatro nombres.");
+    if (listaDeNombres.length % 2 !== 0) return alert("Se necesita una cantidad par de nombres.");
   }
-  return array;
+  sorteoRealizado = true;
+  if (listaDeNombres.length < 2) return alert("No hay suficientes nombres para sortear.");
+  const indice1 = Math.floor(Math.random() * listaDeNombres.length);
+  const nombre1 = listaDeNombres.splice(indice1, 1)[0];
+  const indice2 = Math.floor(Math.random() * listaDeNombres.length);
+  const nombre2 = listaDeNombres.splice(indice2, 1)[0];
+  alert(`Los nombres sorteados son: ${nombre1} - ${nombre2}`);
+  document.getElementById("listaAmigos").innerHTML = listaDeNombres.map(n => `<li>${n}</li>`).join("");
+  document.getElementById("resultado").innerHTML += `<li>${nombre1} - ${nombre2}</li>`;
 }
-
-
-
-   
