@@ -1,5 +1,4 @@
-// Código creado por Maucho6340 12 feb 2025, con bastante ayuda IA
-
+// Código creado por Maucho6340 12 feb 2025.
 
 let listaDeNombres = [], sorteoRealizado = false;
 
