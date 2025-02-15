@@ -1,31 +1,19 @@
-// Código creado por Maucho6340 12 feb 2025.
 
-let listaDeNombres = [], sorteoRealizado = false;
+/*1ro: Capturar el valor del campo de entrada: Utilizar document.getElementById 
+o document.querySelector para obtener el texto ingresado por el usuario.*/
 
-// No permite agregar mas nombres una vez iniciado el sorteo
-function agregarAmigo() {
-  if (sorteoRealizado) return alert ("Debes ingresar todos los nombres de una sola vez"), document.getElementById("amigo").value = "";
-  let nombre = document.getElementById("amigo").value;
-  //Solo permite ingresar strings
-  if (!isNaN(nombre)) return alert("Sólo puedes ingresar nombres"), document.getElementById("amigo").value = "";
-  if (nombre) listaDeNombres.push(nombre), console.log(`Nombre agregado: ${nombre}`), document.getElementById("amigo").value = "", document.getElementById("listaAmigos").innerHTML += `<li>${nombre}</li>`;
-}
+/*2do: Validar la entrada: Implementar una validación para asegurarse de que el campo no esté vacío. 
+Si está vacío, mostrar un alert con un mensaje de error: "Por favor, inserte un nombre."*/
 
-function sortearAmigo() {
-  if (!sorteoRealizado) {
-   // Permite sortear solo si hay cuatro o mas nombres y en cantidad par. 
-    if (listaDeNombres.length < 4) return alert ("Se necesita al menos cuatro nombres.");
-    if (listaDeNombres.length % 2 !== 0) return alert ("Se necesita una cantidad par de nombres.");
-  }
-  sorteoRealizado = true;
-  // aviso cuando se han acabado los nombres de la lista
-  if (listaDeNombres.length < 2) return alert("No hay suficientes nombres para sortear.");
-  const indice1 = Math.floor(Math.random() * listaDeNombres.length);
-  const nombre1 = listaDeNombres.splice(indice1, 1)[0];
-  const indice2 = Math.floor(Math.random() * listaDeNombres.length);
-  const nombre2 = listaDeNombres.splice(indice2, 1)[0];
-  // publicación de parejas
-  console.log(`Los nombres sorteados son: ${nombre1} - ${nombre2}`);
-  document.getElementById("listaAmigos").innerHTML = listaDeNombres.map(n => `<li>${n}</li>`).join("");
-  document.getElementById("resultado").innerHTML += `<li>${nombre1} - ${nombre2}</li>`;
+const inputField = document.querySelector ('#amigo'); //captura el valor del campo con id amigo
+const AddButton = documento.querySelector ('.button-add') //captura el botón con clase button-add
+
+function agregarAmigo() { //declara función para ingresar nombre
+   const inputValue = inputField.value.trim(); //captura valor ingresado y lo guarda en inputValue sin espacios en blanco
+   if (inputValue == ''){ //verifica que inputValue no esté vacío
+      alert ('Por favor, inserte un nombre.'); //si está vacío, emite mensaje
+   } else {
+      console.log ('valor ingresado:', inputValue); // o si no: mensaje en consola con el valor agregado
+      inputField = ''; //deja limpio el campo para un nuevo ingreso
+   }
 }
