@@ -1,13 +1,9 @@
-
-/*1ro: Capturar el valor del campo de entrada: Utilizar document.getElementById 
-o document.querySelector para obtener el texto ingresado por el usuario.*/
-
-/*2do: Validar la entrada: Implementar una validación para asegurarse de que el campo no esté vacío. 
-Si está vacío, mostrar un alert con un mensaje de error: "Por favor, inserte un nombre."*/
+// CALLENGE_AMIGO_SECRETO Maucho6340 feb 2025
 
 const inputField = document.querySelector('#amigo'); // Selecciona input con id "amigo" y lo almacena en inputField
 const addButton = document.querySelector('.button-add'); // Selecciona botón clase "button-add" y lo almacena en AddButton
 const listaAmigos = document.querySelector('#listaAmigos'); //selecciona el contenedor <ul> con id listaAmigos
+const resultado = document.getElementById('resultado'); // Selecciona el contenedor para el resultado del sorteo
 const participantes = []; //crea array para almacenar nombres
 
 
@@ -31,7 +27,18 @@ function actualizarListaDeAmigos (){
     });
   }
 
+function sortearAmigo () {  // Función para sortear amigo al azar
+  if (participantes.length === 0){ // Si el array está vacío
+    alert ('No hay mas nombres para sortear'); //Imprime mensaje
+    resultado.innerHTML=''; // Limpia el resultado anterior
+    return; //si no, devuelve el valor 
+  }
+const randomIndex = Math.floor(Math.random()*participantes.length); //Genera índice aleatorio
+const amigoSorteado = participantes[randomIndex]; //Obtiene el nombre sorteado
+participantes.splice(randomIndex, 1); // Elimina el nombre sorteado del array "participantes"
+resultado.innerHTML = `El amigo sorteado es: ${amigoSorteado}`; //Muestra el resultado del sorteo
+actualizarListaDeAmigos (); //Actualiza la lista de amigos después de eliminar al sorteado
+}
+
 addButton.addEventListener('click', agregarAmigo); // Asigna la función al evento click del botón
 
-/*Actualizar el array de amigos: Si el valor es válido, añadirlo al arreglo que almacena 
-los nombre de amigos usando el método.push().*/
